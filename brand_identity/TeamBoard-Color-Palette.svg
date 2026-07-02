@@ -1,0 +1,52 @@
+<svg viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="640" fill="#F5F3ED"/>
+
+  <text x="40" y="60" font-family="'Fraunces','Playfair Display',Georgia,serif" font-size="34" font-weight="600" fill="#121A22">TeamBoard — Color System</text>
+  <text x="40" y="86" font-family="'IBM Plex Mono','JetBrains Mono',monospace" font-size="12" letter-spacing="2" fill="#26323C">INK &amp; PATINA — PREMIUM, MATERIAL-DERIVED PALETTE</text>
+
+  <!-- Row 1 -->
+  <g>
+    <rect x="40" y="120" width="250" height="140" rx="10" fill="#121A22"/>
+    <text x="40" y="282" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Drafting Ink</text>
+    <text x="40" y="302" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#121A22 — primary / text</text>
+  </g>
+  <g>
+    <rect x="325" y="120" width="250" height="140" rx="10" fill="#26323C"/>
+    <text x="325" y="282" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Slate</text>
+    <text x="325" y="302" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#26323C — dark surface</text>
+  </g>
+  <g>
+    <rect x="610" y="120" width="250" height="140" rx="10" fill="#4C8577"/>
+    <text x="610" y="282" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Verdigris</text>
+    <text x="610" y="302" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#4C8577 — primary accent</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g>
+    <rect x="40" y="340" width="250" height="140" rx="10" fill="#B4915B"/>
+    <text x="40" y="502" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Brass</text>
+    <text x="40" y="522" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#B4915B — CTA / highlight</text>
+  </g>
+  <g>
+    <rect x="325" y="340" width="250" height="140" rx="10" fill="#E9E6DE" stroke="#D8D4C8" stroke-width="1"/>
+    <text x="325" y="502" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Fog</text>
+    <text x="325" y="522" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#E9E6DE — background</text>
+  </g>
+  <g>
+    <rect x="610" y="340" width="250" height="140" rx="10" fill="#F5F3ED" stroke="#D8D4C8" stroke-width="1"/>
+    <text x="610" y="502" font-family="'Fraunces',Georgia,serif" font-size="18" fill="#121A22">Bone</text>
+    <text x="610" y="522" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#26323C">#F5F3ED — card surface</text>
+  </g>
+
+  <!-- Status mapping -->
+  <text x="40" y="575" font-family="'IBM Plex Mono',monospace" font-size="12" letter-spacing="2" fill="#26323C">TASK STATUS MAPPING</text>
+
+  <rect x="40" y="590" width="140" height="34" rx="6" fill="#26323C"/>
+  <text x="60" y="612" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#F5F3ED">TODO</text>
+
+  <rect x="200" y="590" width="180" height="34" rx="6" fill="#B4915B"/>
+  <text x="220" y="612" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#121A22">IN PROGRESS</text>
+
+  <rect x="400" y="590" width="140" height="34" rx="6" fill="#4C8577"/>
+  <text x="420" y="612" font-family="'IBM Plex Mono',monospace" font-size="13" fill="#F5F3ED">DONE</text>
+</svg>

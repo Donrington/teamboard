@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ *
+ * Base — the "Ink & Patina" editorial foundation (docs/00 §6, docs/05).
+ * ------------------------------------------------------------------ */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-fog text-ink font-sans;
+    font-feature-settings: 'ss01';
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: rgba(76, 133, 119, 0.22);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(18, 26, 34, 0.18) transparent;
+  }
+  *::-webkit-scrollbar { width: 10px; height: 10px; }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(18, 26, 34, 0.16);
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Reusable editorial primitives.
+ * ------------------------------------------------------------------ */
+@layer components {
+  /* Small mono uppercase label — the "ledger" voice. */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase text-muted;
+    letter-spacing: 0.2em;
+  }
+
+  /* Warm card surface with a hairline border. */
+  .surface {
+    @apply rounded-card border border-line bg-bone;
+  }
+
+  .hairline {
+    @apply border-line;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

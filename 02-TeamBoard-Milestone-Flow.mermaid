@@ -1,0 +1,11 @@
+flowchart LR
+    M0["M0\nPlan & Architecture\n(ADR + diagrams)"] --> M1["M1\nRepo + Env Setup\n(monorepo, Atlas cluster)"]
+    M1 --> M2["M2\nDB Schema\n(Mongoose schemas + Atlas)"]
+    M2 --> M3["M3\nNestJS Auth Module\n(signup/login, JWT, bcrypt)"]
+    M3 --> M4["M4\nNestJS Project/Task Modules\n(CRUD, DTOs, guards)"]
+    M4 --> M5["M5\nReact Scaffold\n(Vite, routing, folders)"]
+    M5 --> M6["M6\nFrontend Auth Flow\n(login/signup, protected routes)"]
+    M6 --> M7["M7\nProject/Task UI\n(React Query, CRUD screens)"]
+    M7 --> M8["M8\nTesting + Postman\n(unit tests, API collection)"]
+    M8 --> M9["M9\nDeploy\n(Vercel FE+BE, Atlas prod)"]
+    M9 --> M10["M10\nDocs + Client Demo\n(README, walkthrough script)"]

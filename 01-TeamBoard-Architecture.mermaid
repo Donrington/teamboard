@@ -1,0 +1,32 @@
+flowchart TB
+    Browser["User Browser"]
+
+    subgraph VercelFE["Vercel — Frontend Hosting"]
+        FE["React + Vite + TypeScript SPA<br/>(TeamBoard UI)"]
+    end
+
+    subgraph VercelAPI["Vercel — Backend (Serverless Functions)"]
+        API["NestJS API<br/>AuthModule / ProjectModule / TaskModule"]
+        Guard["JWT Guard (Passport)"]
+        DTO["DTOs + class-validator"]
+    end
+
+    subgraph AtlasInfra["MongoDB Atlas — Managed Cluster"]
+        DB[("MongoDB<br/>users / projects / tasks collections")]
+    end
+
+    GH["GitHub Repo<br/>/frontend  /backend"]
+
+    Browser -->|HTTPS| FE
+    FE -->|"REST calls via Axios + React Query<br/>Authorization: Bearer <JWT>"| API
+    API --> Guard
+    API --> DTO
+    API -->|"Mongoose ODM over SRV connection string<br/>(cached connection across invocations)"| DB
+
+    GH -->|"git push -> auto-deploy"| VercelFE
+    GH -->|"git push -> auto-deploy"| VercelAPI
+
+    style VercelFE fill:#000000,color:#ffffff
+    style VercelAPI fill:#1a1a1a,color:#ffffff
+    style AtlasInfra fill:#13AA52,color:#ffffff
+    style GH fill:#24292e,color:#ffffff
