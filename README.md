@@ -6,6 +6,8 @@
 
 React + Vite · NestJS · MongoDB Atlas · TypeScript end-to-end
 
+**Live:** [teamboard-web.vercel.app](https://teamboard-web.vercel.app) · API: [teamboard-api.vercel.app/api/health](https://teamboard-api.vercel.app/api/health)
+
 </div>
 
 ---
@@ -200,10 +202,16 @@ once in `frontend/tailwind.config.ts`. See [`docs/05`](./docs/05-frontend-scaffo
 
 ## Deployment
 
+**Live now:** [teamboard-web.vercel.app](https://teamboard-web.vercel.app) (frontend) and
+[teamboard-api.vercel.app](https://teamboard-api.vercel.app/api/health) (backend), both on
+Vercel, both talking to the same MongoDB Atlas cluster.
+
 Two Vercel projects from this one repo (frontend static, backend serverless) plus Atlas.
 The backend runs as a single cached serverless function that **reuses its Mongoose
 connection** across invocations — the key to not exhausting Atlas under serverless
-traffic. Full procedure and the always-on "Path B" (Railway/Render) alternative:
+traffic. Full procedure, the always-on "Path B" (Railway/Render) alternative, and the
+real gotchas hit getting this live (Express major-version mismatch, env-var newline
+corruption from shell piping, Vercel Deployment Protection, Atlas Network Access):
 [`docs/09`](./docs/09-deployment.md).
 
 ---

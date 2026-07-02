@@ -25,6 +25,7 @@
   "overrides": {
     "@nestjs/common": "^11.1.27",
     "@nestjs/core": "^11.1.27",
-    "multer": "^2.2.0"
+    "multer": "^2.2.0",
+    "express": "^5.2.1"
   }
 }

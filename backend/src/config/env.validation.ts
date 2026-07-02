@@ -21,4 +21,8 @@ export const envValidationSchema = Joi.object({
   }),
   JWT_EXPIRES_IN: Joi.string().default('7d'),
   CORS_ORIGIN: Joi.string().default('http://localhost:5173'),
-});
+})
+  // Hosting platforms (Vercel, etc.) inject their own env vars (AWS_*, VERCEL_*, ...)
+  // alongside ours. This schema only cares about the keys above — it must not reject
+  // the platform's own variables just because they aren't declared here.
+  .unknown(true);

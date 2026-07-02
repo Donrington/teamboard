@@ -25,8 +25,14 @@ async function bootstrapServerless(): Promise<Express> {
 }
 
 export default async function handler(req: Request, res: Response): Promise<void> {
-  if (!cachedApp) {
-    cachedApp = await bootstrapServerless();
+  try {
+    if (!cachedApp) {
+      cachedApp = await bootstrapServerless();
+    }
+    cachedApp(req, res);
+  } catch (err) {
+    // Log the full error server-side, but never leak internals to the client.
+    console.error('Serverless bootstrap failed:', err);
+    res.status(500).json({ statusCode: 500, message: 'Internal server error' });
   }
-  cachedApp(req, res);
 }
