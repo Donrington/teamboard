@@ -6,7 +6,7 @@
 
 React + Vite · NestJS · MongoDB Atlas · TypeScript end-to-end
 
-**Live:** [teamboard-web.vercel.app](https://teamboard-web.vercel.app) · API: [teamboard-api.vercel.app/api/health](https://teamboard-api.vercel.app/api/health)
+**Live:** [teamboard-web-amber.vercel.app](https://teamboard-web-amber.vercel.app) · API: [teamboard-api.vercel.app/api/health](https://teamboard-api.vercel.app/api/health)
 
 </div>
 
@@ -202,9 +202,14 @@ once in `frontend/tailwind.config.ts`. See [`docs/05`](./docs/05-frontend-scaffo
 
 ## Deployment
 
-**Live now:** [teamboard-web.vercel.app](https://teamboard-web.vercel.app) (frontend) and
+**Live now:** [teamboard-web-amber.vercel.app](https://teamboard-web-amber.vercel.app) (frontend) and
 [teamboard-api.vercel.app](https://teamboard-api.vercel.app/api/health) (backend), both on
 Vercel, both talking to the same MongoDB Atlas cluster.
+
+> Note the `-amber` suffix on the frontend domain: the plain `teamboard-web.vercel.app`
+> is an unrelated project owned by a different Vercel account — Vercel's `*.vercel.app`
+> subdomain namespace is global, not scoped per team, so ours was auto-suffixed to avoid
+> the collision.
 
 Two Vercel projects from this one repo (frontend static, backend serverless) plus Atlas.
 The backend runs as a single cached serverless function that **reuses its Mongoose

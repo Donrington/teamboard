@@ -2,11 +2,16 @@
 
 > **Milestone M9.** How TeamBoard goes to production: the frontend as a static Vite
 > build, the backend as a Vercel serverless function, both talking to MongoDB Atlas.
-> **This is live** — [teamboard-web.vercel.app](https://teamboard-web.vercel.app) /
+> **This is live** — [teamboard-web-amber.vercel.app](https://teamboard-web-amber.vercel.app) /
 > [teamboard-api.vercel.app](https://teamboard-api.vercel.app/api/health) — and this doc
 > reflects the config that's actually running, including the real problems hit getting
 > there. Deployment is the one milestone where "it built cleanly" and "it works in
 > production" turned out to be two different claims — worth reading in full.
+>
+> One more, purely cosmetic: the frontend's domain has an `-amber` suffix because the
+> plain `teamboard-web.vercel.app` was already claimed by an unrelated project on
+> Vercel's *global* `*.vercel.app` namespace (not scoped per team/account) — nothing to
+> do with our deployment, just a name collision.
 
 ---
 
@@ -57,7 +62,7 @@ production."
 | `MONGODB_URI` | Atlas prod SRV string, incl. `/teamboard` |
 | `JWT_SECRET` | long random secret |
 | `JWT_EXPIRES_IN` | `7d` |
-| `CORS_ORIGIN` | `https://teamboard-web.vercel.app` |
+| `CORS_ORIGIN` | the deployed frontend's *actual* assigned domain — verify via `vercel project ls`, don't assume `<name>.vercel.app` is free |
 | `NODE_ENV` | `production` |
 
 **teamboard-web**
@@ -141,6 +146,19 @@ to `^5.0.6`) to match what `@nestjs/platform-express@11` actually expects, plus 
 `overrides` entry so the whole dependency tree dedupes to one Express version instead of
 nesting a second copy.
 
+### Problem 5 — a domain name collision (cosmetic, but worth documenting)
+After everything above was fixed and verified working, the frontend was reported as
+showing an entirely different app — a Next.js SaaS dashboard with dark-mode toggles and
+"Multi-tenant" branding, nothing like TeamBoard. Cause: `teamboard-web.vercel.app` (no
+suffix) belongs to an **unrelated project on a different Vercel account** — the
+`*.vercel.app` subdomain namespace is global across all Vercel users, not scoped per
+team, so whichever project claims a name first gets the bare domain. Our project's
+*actual* assigned production domain was `teamboard-web-amber.vercel.app`, auto-suffixed
+by Vercel to avoid the collision — confirmed via `vercel project ls`, which shows each
+project's real "Latest Production URL." Never assume `<project-name>.vercel.app` is
+free; always check. This also meant `CORS_ORIGIN` had been pointed at the wrong (someone
+else's) domain the whole time — fixed once the real domain was found.
+
 ### How this was actually diagnosed
 Not by reading the error — there wasn't one. By repeatedly deploying a **stripped-down
 diagnostic `api/index.ts`** that tested one hypothesis at a time (raw Mongoose connect
@@ -161,7 +179,9 @@ than guessing at a stack trace that doesn't exist.
    `GET /api/health`.
 4. **Web project:** import the same repo → Root Directory `frontend` → set env vars →
    deploy.
-5. Set the API's `CORS_ORIGIN` to the deployed web URL; redeploy the API if it changed.
+5. Run `vercel project ls` and confirm each project's **actual** production URL (don't
+   assume `<project-name>.vercel.app` — see Problem 5). Set the API's `CORS_ORIGIN` to
+   the web project's *real* URL; redeploy the API if it changed.
 6. **Project Settings → Deployment Protection → disable** on both projects (required for
    a reviewer/tester to reach the API without a Vercel login).
 7. Point the Postman collection's `{{baseUrl}}` at the deployed API and run it.
