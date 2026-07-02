@@ -1,0 +1,35 @@
+# Optional local orchestration (bonus per the assessment brief — not required for
+# day-to-day dev, which uses `npm run dev:backend` / `npm run dev:frontend` directly).
+#
+# Still connects to MongoDB Atlas (not a local Mongo container) — that decision is
+# explained in docs/00 · ADR-001. Fill in backend/.env and frontend/.env first
+# (see their .env.example files), then:
+#
+#   docker compose up --build
+#
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file:
+      - backend/.env
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:4000/api}
+        VITE_CLOUDINARY_CLOUD_NAME: ${VITE_CLOUDINARY_CLOUD_NAME:-}
+        VITE_CLOUDINARY_UPLOAD_PRESET: ${VITE_CLOUDINARY_UPLOAD_PRESET:-}
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

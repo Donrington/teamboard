@@ -42,3 +42,13 @@ Thumbs.db
 # Misc
 *.pem
 .cache/
+
+# Internal build docs / working notes — not part of the public deliverable.
+# README.md stays tracked; everything else here doesn't. Mermaid diagrams stay.
+/docs/
+/instructions.md
+/03-TeamBoard-Build-Roadmap.md
+/PROJECT-SUMMARY.md
+
+# Internal agent/skill tooling — not meant for repo visitors.
+/.agents/
